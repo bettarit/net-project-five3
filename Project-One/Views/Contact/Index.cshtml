@@ -1,0 +1,102 @@
+﻿@model ContactForm.Models.Contact
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<style>
+    .container {
+        align-items: center;
+        justify-content: center;
+    }
+
+    img {
+        max-width: 50%;
+        max-height: 40%;
+        float: left;
+    }
+
+    .form-horizontal {
+        font-size: 15px;
+        padding-left: 1px;
+        padding-top: 1%;
+        float: right;
+    }
+</style>
+
+<div style="text-align:center" ><h4>ContactUs</h4></div>
+<div style="text-align:center"><h5>We look forward to hearing from you</h5></div>
+@using (Html.BeginForm("Index", "Contact", FormMethod.Post))
+{
+    @Html.AntiForgeryToken()
+
+    <div class="form-horizontal" style="text-align:center">
+
+        <div class="container">
+            <div class="image">
+                <img align="left" src="@Url.Content("~/Images/1568886999Conatct2.jpg")" />
+            </div>
+
+
+
+            <hr />
+            <div style="float:right; width:50%">
+                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                <div class="form-group">
+                    @Html.LabelFor(model => model.FirstName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="align-items:center">
+                        @Html.EditorFor(model => model.FirstName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.FirstName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.LastName, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10" style="text-align:center">
+                        @Html.EditorFor(model => model.LastName, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.LastName, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Telephone, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Telephone, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Telephone, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    @Html.LabelFor(model => model.Email, htmlAttributes: new { @class = "control-label col-md-2" })
+                    <div class="col-md-10">
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <input type="submit" value="Submit" class="btn btn-default" style="background-color:deepskyblue" />
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <label class="label-success"> @ViewBag.SuccessMessage </label>
+                    </div>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-offset-2 col-md-10">
+                        <label class="label-danger"> @ViewBag.DuplicateMessage </label>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+
+
+
+@section Scripts {
+    @Scripts.Render("~/bundles/jqueryval")
+}
+
